@@ -6,10 +6,9 @@ import ControlPanel from './control-panel';
 import Pins from './pins';
 import CityInfo from './city-info';
 import NavBar from './Navbar';
-import dotenv from 'dotenv';
 // import mockData from './mockData.js';
 
-const TOKEN = process.env.MAPBOX_KEY; // Set your mapbox token here
+const TOKEN = process.env.REACT_APP_MAPBOX_KEY; // Set your mapbox token here
 
 const fullscreenControlStyle = {
   position: 'absolute',
@@ -50,6 +49,10 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    // this.setState({
+    //   isLoading: false,
+    //   data: mockData
+    // });
     this.fetchData()
       .then(data => {
         console.log(data)
@@ -63,7 +66,6 @@ export default class App extends Component {
 
   fetchData() {
     const apiEndpoint = `https://wheretopark.netlify.com/.netlify/functions/carparks`
-
     return (fetch(apiEndpoint, { headers: { "Accept": "application/json" } })
       .then((response) => response.json())
       .then(data => data)

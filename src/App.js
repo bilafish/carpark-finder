@@ -5,7 +5,7 @@ import 'mapbox-gl/src/css/mapbox-gl.css';
 import ControlPanel from './control-panel';
 import Pins from './pins';
 import CityInfo from './city-info';
-import NavBar from './Navbar';
+import NavBar from './components/Navbar';
 // import mockData from './mockData.js';
 
 const TOKEN = process.env.REACT_APP_MAPBOX_KEY; // Set your mapbox token here

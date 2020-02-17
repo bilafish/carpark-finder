@@ -2,7 +2,7 @@
 [Carpark Finder](https://wheretopark.netlify.com/) is a simple web application aimed at creating a map-based tool for drivers in Singapore to find available parking lots easily.
 
 ## Technologies
-- React (Front-End)
+- :atom_symbol: React (Front-End)
 - [Netlify Functions](https://www.netlify.com/products/functions/) (Powered by AWS Lambda/ For backend tasks)
 - [Mapbox](https://www.mapbox.com/) (3rd-Party Map Visualisation Service)
 - [LTA DataMall API](https://www.mytransport.sg/content/mytransport/home/dataMall.html) (For real-time data on carpark availability)

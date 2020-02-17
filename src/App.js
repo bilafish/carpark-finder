@@ -1,6 +1,6 @@
 import './App.css';
 import React, {Component} from 'react';
-import MapGL, {Popup, NavigationControl, ScaleControl} from 'react-map-gl';
+import MapGL, {Popup, GeolocateControl, NavigationControl, ScaleControl} from 'react-map-gl';
 import 'mapbox-gl/src/css/mapbox-gl.css';
 // import ControlPanel from './control-panel';
 import Pins from './pins';
@@ -11,12 +11,12 @@ import Footer from './components/Footer'
 
 const TOKEN = process.env.REACT_APP_MAPBOX_KEY; // Set your mapbox token here
 
-// const fullscreenControlStyle = {
-//   position: 'absolute',
-//   top: 0,
-//   left: 0,
-//   padding: '10px'
-// };
+const geolocateStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  margin: 10
+};
 
 const navStyle = {
   position: 'absolute',
@@ -77,6 +77,11 @@ export default class App extends Component {
     this.setState({viewport});
   };
 
+  _onViewportChange = (viewport) => {
+   viewport.zoom=13 //Whatever zoom level you want
+    this.setState({ viewport })
+  };
+
   _onClickMarker = city => {
     this.setState({popupInfo: city});
   };
@@ -117,6 +122,12 @@ export default class App extends Component {
         >
           <Pins data={this.state.data} onClick={this._onClickMarker} />
           {this._renderPopup()}
+          <GeolocateControl
+            onViewportChange={this._onViewportChange}
+            style={geolocateStyle}
+            positionOptions={{enableHighAccuracy: true}}
+            trackUserLocation={true}
+          />
           <div style={navStyle}>
             <NavigationControl />
           </div>

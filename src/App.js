@@ -1,21 +1,22 @@
 import './App.css';
 import React, {Component} from 'react';
-import MapGL, {Popup, NavigationControl, FullscreenControl, ScaleControl} from 'react-map-gl';
+import MapGL, {Popup, NavigationControl, ScaleControl} from 'react-map-gl';
 import 'mapbox-gl/src/css/mapbox-gl.css';
-import ControlPanel from './control-panel';
+// import ControlPanel from './control-panel';
 import Pins from './pins';
 import CityInfo from './city-info';
 import NavBar from './components/Navbar';
+import Footer from './components/Footer'
 // import mockData from './mockData.js';
 
 const TOKEN = process.env.REACT_APP_MAPBOX_KEY; // Set your mapbox token here
 
-const fullscreenControlStyle = {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  padding: '10px'
-};
+// const fullscreenControlStyle = {
+//   position: 'absolute',
+//   top: 0,
+//   left: 0,
+//   padding: '10px'
+// };
 
 const navStyle = {
   position: 'absolute',
@@ -80,8 +81,7 @@ export default class App extends Component {
     this.setState({popupInfo: city});
   };
 
-
-
+  // Renders a popup when a pin marker is clicked
   _renderPopup() {
     const {popupInfo} = this.state;
     let coordinates = ((popupInfo != null) ? popupInfo.Location.split(" ") : ["0", "0"]);
@@ -105,32 +105,27 @@ export default class App extends Component {
     const {viewport} = this.state;
 
     return (
-      <div style={{ width: "100%", height: "100%" }}>
+      <div style={{ width: "100%", height: "100%", background: "#292929"}}>
         <NavBar />
         <MapGL
           {...viewport}
           width="100%"
-          height="100%"
+          height="83%"
           mapStyle="mapbox://styles/mapbox/dark-v9"
           onViewportChange={this._updateViewport}
           mapboxApiAccessToken={TOKEN}
         >
           <Pins data={this.state.data} onClick={this._onClickMarker} />
-
           {this._renderPopup()}
-
-          <div style={fullscreenControlStyle}>
-            <FullscreenControl />
-          </div>
           <div style={navStyle}>
             <NavigationControl />
           </div>
           <div style={scaleControlStyle}>
             <ScaleControl />
           </div>
-
-          <ControlPanel containerComponent={this.props.containerComponent} />
+          {/*<ControlPanel containerComponent={this.props.containerComponent} >*/}
         </MapGL>
+        <Footer/>
       </div>
     );
   }

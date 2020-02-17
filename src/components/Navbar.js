@@ -30,6 +30,7 @@ const NavBar = () => {
           borderColor: 'white',
           borderRadius: '10px',
           padding: '0 16px 0',
+          textDecoration: 'none'
         }}
           href="https://github.com/bilafish/carpark-finder"
         >

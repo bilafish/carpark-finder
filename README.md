@@ -7,6 +7,9 @@
 - [Mapbox](https://www.mapbox.com/) (3rd-Party Map Visualisation Service)
 - [LTA DataMall API](https://www.mytransport.sg/content/mytransport/home/dataMall.html) (For real-time data on carpark availability)
 
+## Features
+- 📍Find my location (This allows the user to pan and zoom the map to their current location to see the nearby carparks)
+
 ## Development
 To setup the app for development on your local machine, please follow the instructions below:
 1. Clone the repo to your machine

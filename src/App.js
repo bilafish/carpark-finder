@@ -5,14 +5,17 @@ import MapGL, {
   GeolocateControl,
   NavigationControl,
   ScaleControl,
-  FlyToInterpolator
+  FlyToInterpolator,
+  Marker
 } from "react-map-gl";
 import "mapbox-gl/src/css/mapbox-gl.css";
 // import ControlPanel from './control-panel';
-import Pins from "./pins";
+// import Pins from "./pins";
 import CityInfo from "./city-info";
 import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { Group } from "./components/ClusterMarker";
+import Cluster from "./components/Cluster";
 // import mockData from "./mockData.js";
 
 const TOKEN = process.env.REACT_APP_MAPBOX_KEY; // Set your mapbox token here
@@ -84,7 +87,7 @@ export default class App extends Component {
   };
 
   _onViewportChange = viewport => {
-    viewport.zoom = 13; //Whatever zoom level you want
+    viewport.zoom = 14; //Whatever zoom level you want
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     });
@@ -141,9 +144,53 @@ export default class App extends Component {
           mapStyle="mapbox://styles/mapbox/dark-v9"
           onViewportChange={this._updateViewport}
           mapboxApiAccessToken={TOKEN}
+          ref={ref => (this.mapRef = ref)}
         >
-          <Pins data={this.state.data} onClick={this._onClickMarker} />
-          {this._renderPopup()}
+          {/*<Pins data={this.state.data} onClick={this._onClickMarker} />*/}
+          {this.mapRef && (
+            <Cluster
+              map={this.mapRef.getMap()}
+              radius={20}
+              extent={512}
+              nodeSize={40}
+              element={clusterProps => (
+                <Group
+                  onViewportChange={this.onViewportChange}
+                  {...clusterProps}
+                />
+              )}
+            >
+              {this.state.data.map((point, index) => {
+                if (point.Location.length > 0) {
+                  let coordinates = point.Location.split(" ");
+                  return (
+                    <Marker
+                      key={index}
+                      longitude={parseFloat(coordinates[1])}
+                      latitude={parseFloat(coordinates[0])}
+                      lots={point.AvailableLots}
+                      onClick={() => console.log("Hello")}
+                    >
+                      <div
+                        style={{
+                          color: "#fff",
+                          background: "#1978c8",
+                          borderRadius: "20px",
+                          textAlign: "center",
+                          padding: "6px"
+                        }}
+                      >
+                        {point.AvailableLots}
+                      </div>
+                    </Marker>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+            </Cluster>
+          )}
+          {/*this._renderPopup()*/}
           <GeolocateControl
             onViewportChange={this._onViewportChange}
             style={geolocateStyle}

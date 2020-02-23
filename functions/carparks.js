@@ -1,13 +1,13 @@
 import fetch from "node-fetch";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 const API_ENDPOINT = `http://datamall2.mytransport.sg/ltaodataservice/CarParkAvailabilityv2`;
 
 exports.handler = async (event, context) => {
   return fetch(API_ENDPOINT, {
-    method: 'GET',
+    method: "GET",
     headers: {
-    'AccountKey': process.env.LTA_API_KEY
+      AccountKey: process.env.LTA_API_KEY
     }
   })
     .then(response => response.json())
@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
       console.log(typeof data.value);
       return {
         statusCode: 200,
-        body: JSON.stringify(data.value.slice(0,100))
+        body: JSON.stringify(data.value)
       };
     })
     .catch(error => ({ statusCode: 422, body: String(error) }));

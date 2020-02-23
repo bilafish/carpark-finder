@@ -10,7 +10,6 @@ import MapGL, {
 } from "react-map-gl";
 import "mapbox-gl/src/css/mapbox-gl.css";
 // import ControlPanel from './control-panel';
-// import Pins from "./pins";
 import CityInfo from "./city-info";
 import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -145,7 +144,6 @@ export default class App extends Component {
           mapboxApiAccessToken={TOKEN}
           ref={ref => (this.mapRef = ref)}
         >
-          {/*<Pins data={this.state.data} onClick={this._onClickMarker} />*/}
           {this.mapRef && (
             <Cluster
               map={this.mapRef.getMap()}
@@ -168,7 +166,6 @@ export default class App extends Component {
                       longitude={parseFloat(coordinates[1])}
                       latitude={parseFloat(coordinates[0])}
                       lots={point.AvailableLots}
-                      onClick={() => console.log("Hello")}
                     >
                       <div
                         style={{
@@ -176,8 +173,10 @@ export default class App extends Component {
                           background: "#1978c8",
                           borderRadius: "20px",
                           textAlign: "center",
-                          padding: "6px"
+                          padding: "6px",
+                          cursor: "pointer"
                         }}
+                        onClick={() => this._onClickMarker(point)}
                       >
                         {point.AvailableLots}
                       </div>

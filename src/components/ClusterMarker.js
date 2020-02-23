@@ -1,5 +1,4 @@
 import React from "react";
-import { Marker } from "react-map-gl";
 
 export class Group extends React.PureComponent {
   render() {

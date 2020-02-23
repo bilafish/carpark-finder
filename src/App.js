@@ -65,7 +65,6 @@ export default class App extends Component {
     // });
     this.fetchData()
       .then(data => {
-        console.log(data);
         this.setState({
           isLoading: false,
           data: data

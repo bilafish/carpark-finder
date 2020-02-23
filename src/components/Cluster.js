@@ -93,7 +93,6 @@ class Cluster extends PureComponent {
         return point([child.props.longitude, child.props.latitude], child);
       return null;
     });
-    console.log(points);
     cluster.load(points);
     this.cluster = cluster;
     if (innerRef) innerRef(this.cluster);

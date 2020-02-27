@@ -9,12 +9,12 @@ import MapGL, {
   Marker
 } from "react-map-gl";
 import "mapbox-gl/src/css/mapbox-gl.css";
-// import ControlPanel from './control-panel';
 import CityInfo from "./city-info";
 import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { Group } from "./components/ClusterMarker";
 import Cluster from "./components/Cluster";
+import Drawer from "./components/Drawer";
 // import mockData from "./mockData.js";
 
 const TOKEN = process.env.REACT_APP_MAPBOX_KEY; // Set your mapbox token here
@@ -53,7 +53,8 @@ export default class App extends Component {
       },
       isLoading: true,
       data: [],
-      popupInfo: null
+      popupInfo: {},
+      showDrawer: false
     };
   }
 
@@ -105,29 +106,12 @@ export default class App extends Component {
     // Add camera transition when map marker is clicked
     let coordinates = city != null ? city.Location.split(" ") : ["0", "0"];
     this._goToViewport(parseFloat(coordinates[1]), parseFloat(coordinates[0]));
+    // Shows side drawer with carpark info
     this.setState({ popupInfo: city });
+    setTimeout(() => {
+      this.setState({ showDrawer: true });
+    }, 700);
   };
-
-  // Renders a popup when a pin marker is clicked
-  _renderPopup() {
-    const { popupInfo } = this.state;
-    let coordinates =
-      popupInfo != null ? popupInfo.Location.split(" ") : ["0", "0"];
-    return (
-      popupInfo && (
-        <Popup
-          tipSize={5}
-          anchor="top"
-          longitude={parseFloat(coordinates[1])}
-          latitude={parseFloat(coordinates[0])}
-          closeOnClick={false}
-          onClose={() => this.setState({ popupInfo: null })}
-        >
-          <CityInfo info={popupInfo} />
-        </Popup>
-      )
-    );
-  }
 
   render() {
     const { viewport } = this.state;
@@ -188,7 +172,6 @@ export default class App extends Component {
               })}
             </Cluster>
           )}
-          {/*this._renderPopup()*/}
           <GeolocateControl
             onViewportChange={this._onViewportChange}
             style={geolocateStyle}
@@ -201,7 +184,7 @@ export default class App extends Component {
           <div style={scaleControlStyle}>
             <ScaleControl />
           </div>
-          {/*<ControlPanel containerComponent={this.props.containerComponent} >*/}
+          <Drawer visible={this.state.showDrawer} data={this.state.popupInfo} />
         </MapGL>
         <Footer />
       </div>

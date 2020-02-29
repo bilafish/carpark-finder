@@ -1,7 +1,6 @@
 import "./App.css";
 import React, { Component } from "react";
 import MapGL, {
-  Popup,
   GeolocateControl,
   NavigationControl,
   ScaleControl,
@@ -9,7 +8,6 @@ import MapGL, {
   Marker
 } from "react-map-gl";
 import "mapbox-gl/src/css/mapbox-gl.css";
-import CityInfo from "./city-info";
 import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { Group } from "./components/ClusterMarker";

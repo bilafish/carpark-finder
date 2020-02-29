@@ -13,7 +13,8 @@
 
 ## Features
 
-- 📍Find my location (This allows the user to pan and zoom the map to their current location to see the nearby carparks)
+- 📍 Find my location (This allows the user to pan and zoom the map to their current location to see the nearby carparks)
+- 🅿️ Real-time parking availability data (Updated every 1 min)
 
 ## Development
 

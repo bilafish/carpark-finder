@@ -18,6 +18,16 @@ const DrawerContainer = styled.div`
   z-index: 1000;
   border-radius: 20px 0 0 20px;
   transition: transform 0.3s cubic-bezier(0, 0.52, 0, 1);
+
+  // Switch to horizontal drawer on smaller device widths
+  @media (max-width: 800px) {
+    width: 100%;
+    height: 200px;
+    top: 460px;
+    left: 0;
+    transform: ${props =>
+      props.visible ? "translate3d(0, 0, 0)" : "translate3d(0, 300px, 0)"};
+  }
 `;
 
 const Drawer = props => {

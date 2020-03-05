@@ -3,7 +3,7 @@
 [Carpark Finder](https://wheretopark.netlify.com/) is a simple web application aimed at creating a map-based tool for drivers in Singapore to find available parking lots easily.
 
 <p align="center">
-<img src="./screenshots/Main.png" alt="Main Screen" width="800px">
+<img src="./screenshots/Main.png" alt="Main Screen" width="800px"><br/>
 Web
 <br/>
 <img src="./screenshots/Main-mobile.jpg" alt="Main Screen" width="300px">

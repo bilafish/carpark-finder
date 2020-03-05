@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useImperativeHandle, forwardRef } from "react";
 import styled from "styled-components";
 
 const DrawerContainer = styled.div`
@@ -23,16 +23,52 @@ const DrawerContainer = styled.div`
   @media (max-width: 800px) {
     width: 100%;
     height: 200px;
-    top: 460px;
+    top: calc(100vh - 338px);
     left: 0;
     transform: ${props =>
       props.visible ? "translate3d(0, 0, 0)" : "translate3d(0, 300px, 0)"};
   }
 `;
 
-const Drawer = props => {
+const CloseButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 300px;
+  z-index: 1001;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background: #6b6b76;
+  border: none;
+  color: white;
+  opacity: ${props => (props.visible ? "100%" : "0%")};
+  transition: opacity 0.6s linear 1s;
+
+  // For smaller device widths
+  @media (max-width: 800px) {
+    top: -40px;
+    right: 60px;
+  }
+`;
+
+const Drawer = forwardRef((props, ref) => {
+  const [showDrawer, setShowDrawer] = useState(false);
+
+  const closeButtonHandler = () => {
+    setShowDrawer(false);
+  };
+
+  useImperativeHandle(ref, () => ({
+    showDrawerHandler() {
+      setShowDrawer(true);
+    }
+  }));
+
   return (
-    <DrawerContainer visible={props.visible}>
+    <DrawerContainer visible={showDrawer}>
+      <CloseButton onClick={closeButtonHandler} visible={showDrawer}>
+        X
+      </CloseButton>
       <h2 style={{ color: "#97979f" }}>{props.data.Development}</h2>
       <div
         style={{
@@ -61,6 +97,6 @@ const Drawer = props => {
       </span>
     </DrawerContainer>
   );
-};
+});
 
 export default Drawer;

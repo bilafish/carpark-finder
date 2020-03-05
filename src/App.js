@@ -54,6 +54,7 @@ export default class App extends Component {
       popupInfo: {},
       showDrawer: false
     };
+    this.drawer = React.createRef();
   }
 
   componentDidMount() {
@@ -107,7 +108,7 @@ export default class App extends Component {
     // Shows side drawer with carpark info
     this.setState({ popupInfo: city });
     setTimeout(() => {
-      this.setState({ showDrawer: true });
+      this.drawer.current.showDrawerHandler();
     }, 700);
   };
 
@@ -182,7 +183,7 @@ export default class App extends Component {
           <div style={scaleControlStyle}>
             <ScaleControl />
           </div>
-          <Drawer visible={this.state.showDrawer} data={this.state.popupInfo} />
+          <Drawer ref={this.drawer} data={this.state.popupInfo} />
         </MapGL>
         <Footer />
       </div>

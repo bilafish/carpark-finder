@@ -1,7 +1,7 @@
 # Carpark Finder
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7c713cff-1443-400c-a3bd-5268821e246b/deploy-status)](https://app.netlify.com/sites/wheretopark/deploys)
 
-[Carpark Finder](https://wheretopark.netlify.com/) is a simple web application aimed at creating a map-based tool for drivers in Singapore to find available parking lots easily.
+[Carpark Finder](https://wheretopark.netlify.app/) is a simple web application aimed at creating a map-based tool for drivers in Singapore to find available parking lots easily.
 
 <p align="center">
 <img src="./screenshots/Main.png" alt="Main Screen" width="800px"><br/>

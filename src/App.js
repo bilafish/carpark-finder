@@ -73,7 +73,7 @@ export default class App extends Component {
   }
 
   fetchData() {
-    const apiEndpoint = `https://wheretopark.netlify.com/.netlify/functions/carparks`;
+    const apiEndpoint = `https://wheretopark.netlify.app/.netlify/functions/carparks`;
     return fetch(apiEndpoint, { headers: { Accept: "application/json" } })
       .then(response => response.json())
       .then(data => data)

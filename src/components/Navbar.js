@@ -10,7 +10,8 @@ const NavBar = () => {
       maxAge: 3600,
       domain: "netlify.app"
     });
-  }, []);
+  }, [setCookie]);
+  console.log(cookies);
   return (
     <div
       style={{
